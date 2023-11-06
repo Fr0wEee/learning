@@ -3,7 +3,8 @@ import tkinter as tk
 
 #размер окна
 widthHeight = [400, 300]
-
+defultSettingText = ['Arial', 14, 'bold']
+closeButtonStyle = ['Arial', 12, 'bold']
 # Окно по центру
 def center_window(window, width, height):
     screen_width = window.winfo_screenwidth()
@@ -20,11 +21,11 @@ def close_window():
 def get_user_input():
     user_text = getTextUser.get()
     print("Полученный текст:", user_text)
-    return user_text  # Возвращаем текст для использования
+    return user_text  
 
-# Завершение процесса по имени
+
 def kill_process_name():
-    user_text = get_user_input()  # Получаем текст от пользователя
+    user_text = get_user_input()
     os.system(f"taskkill /f /im {user_text}")
 
 # Создание окна
@@ -38,19 +39,26 @@ root.config(bg='#616161')
 root.iconbitmap('icon.ico')
 # Ввод пользователя
 getTextUser = tk.Entry(root)
-getTextUser.pack()
+getTextUser.config(
+                    relief='ridge',
+                    border=2,
+                    font=defultSettingText)
+getTextUser.place(x=85,y=50)
 
 # Кнопка получения текста
 button = tk.Button(root, text="Получить процесс", command=get_user_input)
-button.pack()
+button.config(font=defultSettingText)
+button.place(x=100,y=90)
 
 # Кнопка завершения процесса
 kill = tk.Button(root, text="Убить процесс", command=kill_process_name)
-kill.pack()
+kill.config(font=defultSettingText)
+kill.place(x=120,y=130)
 
 # Кнопка закрытия программы
 closeButton = tk.Button(root, text="Закрыть", command=close_window)
-closeButton.place(x=335, y=10)
+closeButton.config(font=closeButtonStyle)
+closeButton.place(x=305, y=10)
 
 # Запуск основного цикла обработки событий
 root.mainloop()
